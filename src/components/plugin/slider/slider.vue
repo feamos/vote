@@ -33,5 +33,6 @@
     img{
       width 100%
     }
+    clear both
   }
 </style>

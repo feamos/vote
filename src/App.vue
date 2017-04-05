@@ -4,21 +4,26 @@
     <div class="header-wrapper cls">
       <VHeader :login="login"></VHeader>
     </div>
-    <router-view></router-view>
+    <!-- <slider> -->
+      <router-view ></router-view>
+    <!-- </slider> -->
+    
   </div>
 </template>
 
 <script>
   import VHeader from './components/content/header/header'
+  // import slider from './components/plugin/slider/slider'
   export default {
     name: 'app',
     data () {
       return {
-        login: false
+        login: true
       }
     },
     components: {
       VHeader
+      // slider
     }
   }
 </script>
@@ -33,9 +38,9 @@
     -moz-osx-font-smoothing grayscale
     text-align center
     color #2c3e50
-    margin-top 60px
     .header-wrapper{
       /*margin-bottom 1px*/
+      height 70px
     }
   }
 </style>

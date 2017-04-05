@@ -1,35 +1,35 @@
 <template>
-
   <div class="header">
-    <Menu mode="horizontal" :theme="theme1" active-name="1" @on-select="handleSelect" v-if="login">
-      <Menu-item name="slider">
-        <Icon type="ios-paper"></Icon>
-        GO TO Slider
+    <div class="header-left fl">
+      <div class="logo-text fr">VOTE</div>
+      <img class="fl" src="./logo.png" height="58" width="68" alt="">
+      
+    </div>
+      <Menu class="header_right fr"mode="horizontal" :theme="theme1" active-name="1" @on-select="handleSelect" v-if="login">
+        <Menu-item name="slider">
+          <span>首页</span>
+          
+        </Menu-item>
+        <Menu-item name="vote">
+          <span>我的投票</span>
 
-      </Menu-item>
-      <Menu-item name="hello">
-        <Icon type="ios-people"></Icon>
-        GO TO Hello
-
-      </Menu-item>
-      <Menu-item name="3">
-        <Icon type="settings"></Icon>
-        不知道去哪
-
-      </Menu-item>
-    </Menu>
-    <Menu mode="horizontal" :theme="theme1" active-name="1" @on-select="handleSelect" v-else>
-      <Menu-item name="login">
-        <Icon type="ios-paper"></Icon>
-        Login
-
-      </Menu-item>
-      <Menu-item name="register">
-        <Icon type="ios-people"></Icon>
-        Register
-
-      </Menu-item>
-    </Menu>
+      
+        </Menu-item>
+        <Menu-item name="personal">
+          <span>个人中心</span>
+      
+        </Menu-item>
+      </Menu>
+      <Menu class="header_right fr"mode="horizontal" :theme="theme1" active-name="1" @on-select="handleSelect" v-else>
+        <Menu-item name="login">
+          <span>登录</span>
+      
+        </Menu-item>
+        <Menu-item name="register">
+          <span>注册</span>
+        
+        </Menu-item>
+      </Menu>
   </div>
 </template>
 
@@ -38,6 +38,9 @@
     name: 'header',
     props: {
       login: {
+        type: Boolean
+      },
+      yes: {
         type: Boolean
       }
     },
@@ -59,9 +62,9 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus" rel="stylesheet/stylus">
-  .header {
-    float right
-
-  }
+<style scoped>
+  .fl{float:left;}
+  .fr{float:right;}
+  .logo-text{margin-left: 5px;font-size: 48px;color:#FF0000;font-family: Helvetica;}
+  .header_right span{color:#FF0000;font-size: 16px;}
 </style>

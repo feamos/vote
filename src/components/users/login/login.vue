@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" :style="{'z-index': zIndex}">
     <Form ref="formInline" :model="formInline" :rules="ruleInline">
       <Form-item prop="user">
         <Input type="text" v-model="formInline.user" placeholder="Username">
@@ -17,10 +17,11 @@
     </Form>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
   export default {
     data () {
       return {
+        zIndex: 99,
         formInline: {
           user: '',
           password: ''
