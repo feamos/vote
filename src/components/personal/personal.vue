@@ -12,13 +12,12 @@
   export default {
     data () {
       return {
-        value2: 0
       }
     }
   }
 </script>
 <style scoped rel="stylesheet/stylus">
-  .personal {height:570px;padding-top: 120px;font:16px "PingFang SC";color:#000000;background: url(./2.png);}
+  .personal {height:570px;padding-top: 120px;font:16px "PingFang SC";color:#000000;width: 100%;background: white;}
   .personal span {display:inline-block;width: 70px;text-align: left;}
   .personal p {margin-bottom: 30px;}
   .pass p {display: inline-block;padding-bottom: 20px;}

@@ -3,17 +3,17 @@
   <Carousel autoplay v-model="value2" class="v-slider">
     <Carousel-item>
       <div class="demo-carousel">
-        <img src="./banner01.png" alt="">
+        <img src="./images/banner01.png" alt="">
       </div>
     </Carousel-item>
     <Carousel-item>
       <div class="demo-carousel">
-        <img src="./banner02.png" alt="">
+        <img src="./images/banner02.png" alt="">
       </div>
     </Carousel-item>
     <Carousel-item>
       <div class="demo-carousel">
-        <img src="./banner03.png" alt="">
+        <img src="./images/banner03.png" alt="">
       </div>
     </Carousel-item>
   </Carousel>

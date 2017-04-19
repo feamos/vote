@@ -1,24 +1,44 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Vote from '@/components/myvote/Vote'
-import Slider from '@/components/plugin/slider/slider'
+import Vote from '@/components/myvote/vote'
+import Index from '@/components/index/index'
+import Personal from '@/components/personal/personal'
+import tovote from '@/components/vote/tovote/tovote'
+import answer from '@/components/vote/tovote/answer'
+import view from '@/components/votedetails/view'
 import Login from '@/components/users/login/login'
 import Register from '@/components/users/register/register'
-import Personal from '@/components/personal/personal'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/vote',
-      name: 'Vote',
+      name: 'Vote1',
       component: Vote
     },
     {
-      path: '/slider',
-      name: 'Slider',
-      component: Slider
+      path: '/index',
+      name: 'Index',
+      component: Index
     },
+    {
+      path: '/tovote',
+      component: tovote
+    },
+    {
+      path: '/answer',
+      component: answer
+    },
+    {
+      path: '/view',
+      component: view
+    },
+    // {
+    //   path: '/slider',
+    //   name: 'Slider',
+    //   component: Slider
+    // },
     {
       path: '/login',
       name: 'Login',
