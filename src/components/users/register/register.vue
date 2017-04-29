@@ -82,30 +82,32 @@
       <!--</Form-item>-->
     <!--</Form>-->
 
-      <p><label for="">登录名：</label><input type="text"></p>
-      <p><label for="">密码：</label><input type="password"></p>
-      <p><label for="">确认密码：</label><input type="password"></p>
+      <p><label for="">登录名：</label><input type="text" v-model="formRegister.user"></p>
+      <p><label for="">密码：</label><input type="password" v-model="formRegister.passwd"></p>
+      <p><label for="">确认密码：</label><input type="password" v-model="formRegister.passwdCheck"></p>
       <div class="phone">
-      <label for="">手机号：</label><input type="text"><button>发送验证码</button>
+      <label for="">手机号：</label><input type="text" v-model="formRegister.mobile"><button>发送验证码</button>
       </div>
       <p><label for="">验证码：</label><input type="text"></p>
       <p class="select"><input type="checkbox"><span>我已阅读并接受</span><a href="#">voter服务条款</a></p>
       <div class="footer">
-        <button>创建用户</button>
+        <button @click="handleSubmit()">创建用户</button>
       </div>
       <p><a href="#">已有账户立即登录</a></p>
   </div>
 </template>
 <script>
+  import regx from '@/common/js/util/regx'
+  import API from '@/common/js/api/api'
   export default {
     data () {
       const validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'))
         } else {
-          if (this.formCustom.passwdCheck !== '') {
+          if (this.formRegister.passwdCheck !== '') {
             // 对第二个密码框单独验证
-            this.$refs.formCustom.validateField('passwdCheck')
+            this.$refs.formRegister.validateField('passwdCheck')
           }
           callback()
         }
@@ -113,14 +115,16 @@
       const validatePassCheck = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'))
-        } else if (value !== this.formCustom.passwd) {
+        } else if (value !== this.formRegister.passwd) {
           callback(new Error('两次输入密码不一致!'))
         } else {
           callback()
         }
       }
       return {
-        formCustom: {
+        formRegister: {
+          user: '',
+          mobile: '',
           passwd: '',
           passwdCheck: ''
         },
@@ -135,17 +139,43 @@
       }
     },
     methods: {
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!')
-          } else {
-            this.$Message.error('表单验证失败!')
-          }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields()
+      handleSubmit () {
+        const ERR_OK = 0
+        const ALREADY_REG = 10003
+        if (!regx.mobile.test(this.formRegister.mobile) || !regx.password.test(this.formRegister.passwd)) {
+          console.log('不符合規範')
+          return
+        }
+        fetch(API.register, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: this.formRegister.user,
+            mobile: this.formRegister.mobile,
+            password: this.formRegister.passwd
+          })
+        }).then((res) => res.json())
+          .then((json) => {
+            console.log(json)
+            if (json.code === ERR_OK) {
+              console.log('注册成功,请登录。')
+              this.$nextTick(
+                this.$router.push('login')
+              )
+            }
+            if (json.code === ALREADY_REG) {
+              console.log('手机号已被注册。')
+            }
+          })
+//        this.$refs[name].validate((valid) => {
+//          if (valid) {
+//            this.$Message.success('提交成功!')
+//          } else {
+//            this.$Message.error('表单验证失败!')
+//          }
+//        })
       }
     }
   }
