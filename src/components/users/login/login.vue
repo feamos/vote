@@ -31,7 +31,7 @@
       <legend>使用手机号登录</legend>
       <div>
         <img class="pic-input" src="./img/phone.png" alt="">
-        <input type="text" v-model="formInline.user" placeholder="Username" prop="user">
+        <input type="text" v-model="formInline.mobile" placeholder="Mobile" prop="mobile">
       </div>
       <div>
         <img src="./img/pass.png" class="pic-input" alt="">
@@ -51,12 +51,12 @@
     data () {
       return {
         formInline: {
-          user: '',
+          mobile: '',
           password: ''
         },
         login: false,
         ruleInline: {
-          user: [
+          mobile: [
             {required: true, message: '请填写手机号码', trigger: 'blur'},
             {type: 'string', min: 11, message: '请填写正确的手机号码', trigger: 'blur'},
             {type: 'string', max: 11, message: '请填写正确的手机号码', trigger: 'blur'}
@@ -75,7 +75,7 @@
         const PASSWD_ERR = 10001
         const MOBILE_ERR = 10002
         // 正则校验，检验是不是符合标准
-        if (!regx.mobile.test(this.formInline.user) || !regx.password.test(this.formInline.password)) {
+        if (!regx.mobile.test(this.formInline.mobile) || !regx.password.test(this.formInline.password)) {
           console.log('不符合規範')
           return
         }
@@ -86,7 +86,7 @@
             'token': localStorage.getItem('token') || ''
           },
           body: JSON.stringify({
-            mobile: this.formInline.user,
+            mobile: this.formInline.mobile,
             password: this.formInline.password
           })
         }).then((res) => res.json())
@@ -94,13 +94,13 @@
             console.log(json)
             if (json.code === ERR_OK) {
               let userobj = {
-                token: json.data.token,
-                user: json.data.user
+                token: json.data.token
               }
               this.$router.push('/index')
               this.login = true
               localStorage.setItem('token', userobj.token)
-              localStorage.setItem('user', userobj.user)
+              localStorage.setItem('mobile', json.data.user.mobile)
+              localStorage.setItem('userName', json.data.user.userName)
               // this.props.changeLog(true);
               /* no-unused-vars */
               this.$bus.$emit('hello', this.login)

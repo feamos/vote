@@ -1,7 +1,7 @@
 const __APIHOST__ = 'http://192.168.1.217:8080/user'
 // const __APIHOST__ = 'http://localhost:8082/user'
 /* 加入了其他的url */
-const __APIVOTE__ = 'http://192.168.1.219:8080/vote'
+const __APIVOTE__ = 'http://192.168.1.217:8080/vote'
 
 const userApiMaker = (path) => {
   return `${__APIHOST__}/${path}`
